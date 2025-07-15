@@ -1,47 +1,45 @@
 # --- Stage 1: Build ---
 FROM node:20 AS builder
 
-# /app 配下をビルド作業ディレクトリに
 WORKDIR /app
 
-# 1) モノレポのルート package*.json をコピー（キャッシュ効率化）
-COPY package.json package-lock.json ./
+# ルートの package.json + backend の package.json をコピー
+COPY ./package.json ./
+COPY ./package-lock.json ./
+# 自分自身の package.json
 
-# 2) backend ワークスペースの package.json を上書きコピー
-COPY packages/backend/package.json ./package.json
-
-# 依存インストール（npm workspaces）
+# install（npm workspaces 対応）
 RUN npm install --legacy-peer-deps
 
-# 3) backend のソース一式と prisma ディレクトリをコピー
-COPY packages/backend ./       # src/ tsconfig.json など
-COPY packages/backend/prisma ./prisma
+# backend のソースコード + prisma をコピー
+COPY . ./
+# ここで schema.prisma は ./prisma にある
 
-# Prisma Client の生成
+# Prisma クライアント生成
 RUN npx prisma generate
 
-# TypeScript をビルド（./dist フォルダ生成想定）
+# TypeScript ビルド（distに出力される想定）
 RUN npm run build:notype
 
-# --- Stage 2: Production image ---
+# --- Stage 2: Run ---
 FROM node:20-slim
 
-# 非 root ユーザー作成
 RUN useradd --user-group --create-home --shell /bin/false appuser
 
 WORKDIR /app
 
-# ビルド成果物だけコピー
+# 必要ファイルだけコピー
 COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/package.json ./
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
 ENV NODE_ENV=production
 ENV PORT=3001
+
 EXPOSE 3001
 
 USER appuser
 
-# 起動時にマイグレーション＆サーバ起動
+# 本番DBにmigrateしてから起動
 CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.cjs"]
