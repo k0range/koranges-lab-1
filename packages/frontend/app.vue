@@ -2,7 +2,7 @@
   <NuxtLoadingIndicator color="#484848" height="2" />
   <NuxtPage />
   <ClientOnly>
-    <ProfileSetupModal v-if="showProfileSetupModal" @close="showProfileSetupModal = false" />
+    <ProfileSetupModal v-if="showProfileSetupModal" />
   </ClientOnly>
 </template>
 
