@@ -1,0 +1,12 @@
+import type { Context } from 'hono'
+import * as jwtService from '../services/jwtService'
+
+export function getWebSocketToken(c: Context) {
+  const auth = c.get('authUser')
+  if (!auth?.user?.id) {
+    return c.json({ error: 'Unauthorized' }, 401)
+  }
+
+  const token = jwtService.createWebSocketToken(auth.user.id)
+  return c.json({ token })
+}

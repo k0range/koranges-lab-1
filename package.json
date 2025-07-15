@@ -1,0 +1,8 @@
+{
+  "name": "koranges-lab",
+  "private": true,
+  "workspaces": [
+    "packages/backend",
+    "packages/frontend"
+  ]
+}
