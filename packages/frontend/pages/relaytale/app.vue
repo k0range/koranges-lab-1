@@ -75,7 +75,9 @@
               }" 
               content="aa"
             />-->
-            <li v-for="i in roomState.chat">{{ i }}</li>
+            <ul>
+              <li v-for="i in roomState.chat">{{ i }}</li>
+            </ul>
           </Container>
         </div>
         <div class="flex-grow w-1/2">          
