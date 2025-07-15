@@ -1,0 +1,52 @@
+// composables/useSession.ts
+import api from '@/api'
+
+export const useSession = () => {
+  interface User {
+    id: string;
+    name: string | null;
+    email: string;
+    image: string | null;
+    explicitlySetProfile: Boolean;
+  }
+
+  const user = useState<User | null>('user', () => null);        // SSRでもキャッシュ
+  const fetched = useState('user_fetched', () => false);         // fetch済みフラグ
+  const fetching = useState('user_fetching', () => false);       // 重複fetch防止
+
+  // 内部で使用：共通fetchロジック
+  const doFetch = async () => {
+    fetching.value = true
+    try {
+      const res = await (await api.me.$get()).json()
+      console.log("★ session fetched:", res)
+      user.value = res as unknown as User
+    } catch {
+      user.value = null
+    }
+    fetched.value = true
+    fetching.value = false
+  }
+
+  // 最初の読み込み時に一度だけ実行（自動）
+  //if (process.client && !fetched.value && !fetching.value) {
+  //  doFetch()
+  //}
+
+  // 明示的に再フェッチしたいとき用（fetchedを無視）
+  const refetchSession = async () => {
+    await doFetch()
+  }
+
+  const fetchSession = async () => {
+    if (process.client && !fetched.value && !fetching.value) {
+      await doFetch()
+    }
+  }
+
+  return {
+    user,
+    refetchSession,
+    fetchSession
+  }
+}

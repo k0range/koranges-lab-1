@@ -1,0 +1,26 @@
+// Room == Tale?
+model Tale {
+  id          String @id @default(cuid())
+  pubNumber   Int?   @unique @default(autoincrement())
+  finished    Boolean
+  lang        String
+  paragraphs  Paragraph[]
+  beginning   String
+
+  @@schema("relaytale")
+}
+
+model Paragraph {
+  id  String @id @default(cuid())
+
+  tale    Tale @relation(fields: [taleId], references: [id])
+  taleId  String
+  user    User @relation(fields: [userId], references: [id])
+  userId  String
+
+  content  String
+
+  createdAt  DateTime @default(now())
+
+  @@schema("relaytale")
+}

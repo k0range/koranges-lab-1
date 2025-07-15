@@ -1,0 +1,37 @@
+{
+  "name": "backend",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:generate": "prisma migrate dev",
+    "db:migrate": "prisma migrate deploy",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "postinstall": "prisma generate"
+  },
+  "dependencies": {
+    "@auth/core": "^0.40.0",
+    "@auth/prisma-adapter": "^2.10.0",
+    "@hono/auth-js": "^1.0.17",
+    "@hono/node-server": "^1.15.0",
+    "@hono/node-ws": "^1.2.0",
+    "@hono/swagger-ui": "^0.5.2",
+    "@hono/zod-openapi": "^0.19.9",
+    "@prisma/client": "^6.11.1",
+    "dotenv": "^17.1.0",
+    "hono": "^4.8.4",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^20.11.17",
+    "prisma": "^6.11.1",
+    "tsx": "^4.7.1",
+    "typescript": "^5.8.3"
+  },
+  "prisma": {
+    "schema": "./prisma"
+  }
+}
