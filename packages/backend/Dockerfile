@@ -21,7 +21,7 @@ COPY packages/backend/prisma ./prisma
 RUN npx prisma generate
 
 # TypeScript をビルド（./dist フォルダ生成想定）
-RUN npm run build
+RUN npm run build:notype
 
 # --- Stage 2: Production image ---
 FROM node:20-slim
@@ -38,10 +38,10 @@ COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/prisma ./prisma
 
 ENV NODE_ENV=production
-ENV PORT=8080
-EXPOSE 8080
+ENV PORT=3001
+EXPOSE 3001
 
 USER appuser
 
 # 起動時にマイグレーション＆サーバ起動
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.cjs"]
