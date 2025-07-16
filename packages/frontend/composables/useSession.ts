@@ -1,4 +1,5 @@
-import api from '@/api'
+const { $api } = useNuxtApp()
+const api = $api // 互換
 import type { InferResponseType } from 'hono/client'
 
 type User = {
