@@ -17,7 +17,7 @@ RUN npm install --legacy-peer-deps
 # ここで schema.prisma は ./prisma にある
 
 # Prisma クライアント生成
-RUN npx prisma generate --binary-target=debian-openssl-1.1.x
+RUN npx prisma generate
 
 # TypeScript ビルド（distに出力される想定）
 RUN npm run build:notype
