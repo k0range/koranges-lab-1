@@ -17,7 +17,7 @@
         X で続ける
       </button>-->
       
-      <form v-if="authCsrfToken !== null && callbackUrl !== null" class="w-full" action="https://korange-lab-api.korange.work/api/auth/signin/google" method="post">
+      <form v-if="authCsrfToken !== null && callbackUrl !== null" class="w-full" action="https://koranges-lab-api.korange.work/api/auth/signin/google" method="post">
         <input type="hidden" name="csrfToken" :value="authCsrfToken">
         <input type="hidden" name="callbackUrl" :value="callbackUrl">
         <button
