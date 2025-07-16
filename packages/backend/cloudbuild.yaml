@@ -1,0 +1,25 @@
+steps:
+  # 1. Docker イメージをビルド
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'asia-northeast1-docker.pkg.dev/korange-lab-461711/cloud-run-source-deploy/koranges-lab-1/koranges-lab-makeshift:$SHORT_SHA', '.']
+
+  # 2. Prisma マイグレーション（Cloud Build の Node.js 環境で実行）
+  - name: 'node:20'
+    entrypoint: 'npx'
+    args: ['prisma', 'migrate', 'deploy']
+
+  # 3. Cloud Run にデプロイ
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'koranges-lab-makeshift'
+      - '--image=asia-northeast1-docker.pkg.dev/korange-lab-461711/cloud-run-source-deploy/koranges-lab-1/koranges-lab-makeshift:$SHORT_SHA'
+      - '--region=asia-northeast1'
+      - '--platform=managed'
+      - '--allow-unauthenticated'
+      - '--port=3001'
+
+images:
+  - 'asia-northeast1-docker.pkg.dev/korange-lab-461711/cloud-run-source-deploy/koranges-lab-1/koranges-lab-makeshift'
