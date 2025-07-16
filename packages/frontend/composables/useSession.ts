@@ -1,5 +1,3 @@
-const { $api } = useNuxtApp()
-const api = $api // 互換
 import type { InferResponseType } from 'hono/client'
 
 type User = {
@@ -13,6 +11,9 @@ type User = {
 let _pendingPromise: Promise<User | null> | null = null;
 
 export const useSession = () => {
+  const { $api } = useNuxtApp()
+  const api = $api // 互換
+
   const user = useState<User | null>('user', () => null);
 
   const loadFromStorage = () => {
