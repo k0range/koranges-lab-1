@@ -43,4 +43,4 @@ EXPOSE 3001
 USER appuser
 
 # 本番DBにmigrateしてから起動
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.cjs"]
+CMD ["sh", "-c", "node dist/index.cjs"]
