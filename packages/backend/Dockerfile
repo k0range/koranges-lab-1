@@ -8,11 +8,12 @@ COPY ./package.json ./
 COPY ./package-lock.json ./
 # 自分自身の package.json
 
+# backend のソースコード + prisma をコピー
+COPY . ./
+
 # install（npm workspaces 対応）
 RUN npm install --legacy-peer-deps
 
-# backend のソースコード + prisma をコピー
-COPY . ./
 # ここで schema.prisma は ./prisma にある
 
 # Prisma クライアント生成

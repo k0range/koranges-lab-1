@@ -24,7 +24,7 @@
           </div>
         </NuxtLink>
 
-        <div class="p-4 border-dashed border-8 border-[#ff00ff] bg-gradient-to-r from-[#0000ff] via-[#ff0000] to-[#00ffff] mt-16" style="font-family: 'MS Gothic';">
+        <!--<div class="p-4 border-dashed border-8 border-[#ff00ff] bg-gradient-to-r from-[#0000ff] via-[#ff0000] to-[#00ffff] mt-16" style="font-family: 'MS Gothic';">
   <marquee behavior="alternate" scrollamount="20" class="bg-black border-4 border-double border-yellow-300 p-2">
     <h1 class="text-5xl font-extrabold text-[#00ff00]">>>>>>>WHAT THE HELL IS THIS SHITTY CODE!?!?!?!??!?!<<<<</h1>
   </marquee>
@@ -42,7 +42,7 @@
   <p class="text-[#ff00ff] text-2xl font-extrabold mt-6 animate-bounce bg-black p-2 border border-dotted border-white">
     >>> If you need something rn, hit me up: <u>hi (atmark) korange.work</u> <<<
   </p>
-</div>
+</div>-->
       </Section>
     </div>
     <Footer />
