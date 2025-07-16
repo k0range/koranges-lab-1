@@ -50,8 +50,8 @@
       <div v-if="status === 'writing'">
         <Typing
           :user="{ 
-            name: (roomState.users.find((a) => a.id === roomState.batonHolderId)).name, 
-            image: (roomState.users.find((a) => a.id === roomState.batonHolderId)).image
+            name: (roomState.users.find((a) => a.id === roomState.batonHolderId)).name || '', 
+            image: (roomState.users.find((a) => a.id === roomState.batonHolderId)).image || ''
           }"
         />
       </div>
@@ -276,7 +276,7 @@ onMounted(async () => {
       roomState.value.chat.push(message.content)
     }
     if ( message.type === 'finish' ) {
-      location.href = `/tale/${message.id}`
+      location.href = `/relaytale/tale/${message.id}`
     }
 
     if ( message.type === 'roomstate' || message.type === 'baton_change' ) {

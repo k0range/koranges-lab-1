@@ -285,7 +285,7 @@ app.get(
 
             room.paragraphCount += 1
 
-            if ( room.paragraphCount >= room.maxParagraphs ) {
+            if ( room.paragraphCount >= room.maxParagraphs+1 ) {
               // FINISH
               await prisma.tale.update({
                 where: {

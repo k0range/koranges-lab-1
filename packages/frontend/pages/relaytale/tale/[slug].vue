@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import api from '@/api'
+const { $api } = useNuxtApp()
+const api = $api // 互換
 import Layout from '../_components/Layout.vue'
 import Container from '../_components/Container.vue'
 import Paragraph from '../_components/Paragraph.vue'
