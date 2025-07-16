@@ -56,7 +56,7 @@
         />
       </div>
       <div v-if="status !== 'closed' && status !== 'loading' && status !== 'alone_writed'" class="flex gap-3">
-        <button class="text-sm opacity-50 hover:opacity-80 duration-200 mt-1 flex items-center cursor-pointer" v-if="status === 'your_turn'"><SkipForward class="h-4" @click="pass" />Pass</button>
+        <button class="text-sm opacity-50 hover:opacity-80 duration-200 mt-1 flex items-center cursor-pointer" v-if="status === 'your_turn'"  @click="pass"><SkipForward class="h-4" />Pass</button>
         <div class="text-sm opacity-50 mt-1 flex items-center" v-if="timer"><Timer class="h-4" />{{ timer }} seconds left</div>
         <div class="text-sm mt-1 flex items-center opacity-50" :class="{'opacity-100 text-yellow-500' : 8 > roomState.paragraphsRemains, 'opacity-100 text-red-500 font-bold' : roomState.paragraphsRemains === 1}"><Scroll class="h-4" />
           <span v-if="roomState.paragraphsRemains === 1">This paragraph is the end of the story!</span>
