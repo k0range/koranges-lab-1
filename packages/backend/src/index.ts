@@ -5,6 +5,7 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { authHandler, initAuthConfig, verifyAuth } from '@hono/auth-js'
 import Google from '@auth/core/providers/google'
+import Slack from '@auth/core/providers/slack'
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import { prisma } from "./prisma"
 import { z } from 'zod'
@@ -28,7 +29,8 @@ const routes = app
     initAuthConfig((c) => ({
       secret: c.env.AUTH_SECRET,
       providers: [
-        Google
+        Google,
+        Slack
       ],
       callbacks: {
         async redirect({ url, baseUrl }) {
