@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex gap-2 mt-4">
-      <input type="text" class="border border-[#CFCFCF] rounded-xl text-lg py-1.5 px-4 flex-grow" placeholder="Type..." v-model="content">
+      <input type="text" class="border border-[#CFCFCF] rounded-xl text-lg py-1.5 px-4 flex-grow" placeholder="Please continue from above..." v-model="content">
       <Button variant="primary" rounded="xl" @click="handleSend">Write</Button>
     </div>
     <div class="flex"></div>
