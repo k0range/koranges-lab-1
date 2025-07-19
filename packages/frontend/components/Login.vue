@@ -29,6 +29,8 @@
         </button>
       </form>
       <form v-if="authCsrfToken !== null && callbackUrl !== null" class="w-full" action="https://koranges-lab-api.korange.work/api/auth/signin/slack" method="post">
+        <input type="hidden" name="csrfToken" :value="authCsrfToken">
+        <input type="hidden" name="callbackUrl" :value="callbackUrl">
         <button
           class="w-full rounded-full p-2.5 bg-[#ec3750] text-white text-[1.05rem] cursor-pointer duration-200 hover:opacity-90"
           type="submit"
